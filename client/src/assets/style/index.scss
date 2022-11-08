@@ -46,6 +46,12 @@ section{
 
 .error-text{
 	color:red;
+	padding-top: 10px;
+}
+.error-text::before{
+	content:"⚠";
+	display: inline-block;
+	margin-right: 7px;
 }
 
 
