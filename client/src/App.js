@@ -7,8 +7,6 @@ import { AuthContext } from './context';
 import Home from './pages/home/Home';
 import Messages from './pages/messages/Messages';
 
-const existedToken = localStorage.getItem('token') || '';
-
 function App() {
 	const { jwt, user, isAuth } = useContext(AuthContext);
 	return (
