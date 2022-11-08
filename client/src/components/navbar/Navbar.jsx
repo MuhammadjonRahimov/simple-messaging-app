@@ -1,12 +1,15 @@
 import styles from './Navbar.module.scss';
+
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/index';
+
 import Button from '../UI/button/Button';
 
 function Navbar({ title }) {
 	const { setIsAuth, setUser, setToken } = useContext(AuthContext);
 	const navigate = useNavigate();
+
 	function logOut() {
 		setIsAuth(false);
 		setUser(null);
