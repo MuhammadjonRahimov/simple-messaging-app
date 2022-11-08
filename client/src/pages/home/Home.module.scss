@@ -1,66 +1,48 @@
 .window{
-	padding:2rem 0;
-	color:#fff;
-	margin-top: 0;
-	height: 100%;
-	display: grid;
-	place-items:center;
 	position:absolute;
 	top: 50%;
 	left:50%;
 	transform:translate(-50%, -50%);
 	max-width:800px;
-	width: 90%;
+	width: 95%;
 	
 	&__row{
-		background-color: #162232;
+		background-color: #F6FBF9;
 		border-radius:8px;
 		max-width:580px;
 		text-align: center;
-		padding:32px;
-		h1{
-			font-size: 24px;
-			line-height: calc(30/24);
-			margin-bottom: 25px;
+		padding:16px;
+		@media(min-width:767px) {
+			padding:31px;
+		}
+		@media(min-width:991px) {
+			padding:62px;
 		}
 	}
 	&__form{
 		display: flex;
 		flex-direction:column;
-		& .link{
-		align-self:start;
-		padding:5px;
-		color:rgb(90, 206, 245);
-	}
-		input,button,textarea,select{
-			font-size: 14px;
-			line-height: calc(20/14);
+		input {
 			width: 100%;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+		}
+		input,button{
+			line-height: calc(20/23);
 			border-radius:8px;
 			padding:11px 16px;
-			outline:none;
-		}
-		& > *:not(:last-child) {
-			margin-bottom: 46px;
-		}
-		textarea{
-			resize:none;
-			height: 30vh;
-			overflow-y: auto;
-		}
-	}
-	&__btns{
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		& > * {
-			flex: 0 0 30%;
-			font-weight: bold;
-			opacity:0.6;
-			transition:all 0.2s ease-in 0s;
-			&:hover{
-			opacity:1;
+			font-size: 17px;
+			@media(min-width:767px) {
+				font-size: 23px;
 			}
 		}
+		
+		& > button {
+			align-self: center;
+		}
+		
+		& > *:not(:last-child) {
+			margin-bottom: 26px;
+		}
 	}
+	
 }

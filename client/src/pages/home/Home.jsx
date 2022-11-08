@@ -1,21 +1,43 @@
-import Button from '../../components/UI/button/Button';
+import styles from './Home.module.scss';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import styles from './Home.module.scss';
+
+import Button from '../../components/UI/button/Button';
+
+const letterRegex = /[a-z]/;
+const errorMessage = "Name should include only letters.";
 
 function Home() {
 	const navigate = useNavigate();
 
 	async function submit(data) {
-		navigate(`/messages/${data.name}`);
+		const nameFieldChars = watch('name').split("");
+		const allLetters = nameFieldChars.every(char => letterRegex.test(char));
+		if (allLetters) {
+			navigate(`/messages/${data.name.trim()}`);
+		} else {
+			setError('name', { type: "custom", message: errorMessage });
+		}
 	}
 
-	const { register, handleSubmit, formState: { errors, isValid } } = useForm({
-		mode: "onChange",
+	const { register, setError, watch, handleSubmit, formState: { errors } } = useForm({
+		mode: "onSubmit",
 	});
 
 	const inputs = [
-		{ name: 'name', type: 'text', value: '1', message: 'Name is required', placeholder: "Enter your name" },
+		{
+			name: 'name',
+			type: 'text',
+			placeholder: "Enter your name",
+			validation: {
+				required: "Name is required",
+				minLength: {
+					value: 2,
+					message: "You should include at least two chars",
+				},
+
+			}
+		},
 	];
 
 	return (
@@ -28,26 +50,17 @@ function Home() {
 					{inputs.map(input =>
 						<label key={input.name}>
 							<input
+								type={input.type}
+								placeholder={input.placeholder}
 								{...register(
 									input.name,
-									{
-										required: 'The filed must be filled',
-										minLength: {
-											value: input.value || 2,
-											message: `You should includes at least ${input.value ? input.value : '2'} characters`
-										}
-									}
+									input.validation
 								)}
-								placeholder={input.placeholder}
-								type={input.type}
 							/>
-							{errors[input.name] && <p>{errors[input.name].message}</p>}
+							{errors[input.name] && <p className="error-text">{errors[input.name].message}</p>}
 						</label>
 					)}
-					<div className={styles['window__btns']}>
-						{/* <Button type="button" btntype='white'>Cancel</Button> */}
-						<Button btntype='white' disabled={!isValid}>Enter</Button>
-					</div >
+					<Button type="submit">Enter</Button>
 				</form>
 			</div>
 		</div>
