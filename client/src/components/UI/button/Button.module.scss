@@ -1,21 +1,15 @@
 .btn{
-	background-color: #162232;
 	color:#fff;
-	padding:0.2em 0.3em;
-	letter-spacing: 2px;
-	font-weight: 600;
-	font-size: 12px;
-	border-radius:5px;
+	background-color: #84C7AE;
+	border-radius: 23.011px;
+	padding:23px 73px;
+	font-size: 33px;
+	line-height: calc(44/33);
+	font-weight: bold;
 	transition:all 0.2s ease-in 0s;
-	&:hover{
-		// opacity:0.8;
-	}
+	position: relative;
+	z-index: 20;
 	@media(min-width:767.98px) {
 		font-size: 18px;
-	}
-
-	&.white{
-		background-color: #fff;
-		color:#162232;
 	}
 }
