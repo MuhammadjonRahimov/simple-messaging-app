@@ -10,14 +10,14 @@
 	padding:31px;
 	display: flex;
 	flex-direction:column;
-		input {
-			width: 100%;
-			border: 1.5px solid rgba(0, 0, 0, 0.1);
-			padding:16px;
+	input {
+		width: 100%;
+		border: 1.5px solid rgba(0, 0, 0, 0.1);
+		padding:16px;
+		border-radius:15px;
 		}
 		input,button{
 			line-height: calc(20/23);
-			border-radius:8px;
 			font-size: 17px;
 		}
 		& > button {
