@@ -1,6 +1,8 @@
 import styles from './Home.module.scss';
+
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { login_inputs } from '../../utils/inputs';
 
 import Button from '../../components/UI/button/Button';
 
@@ -10,11 +12,12 @@ const errorMessage = "Name should include only letters.";
 function Home() {
 	const navigate = useNavigate();
 
-	async function submit(data) {
-		const nameFieldChars = watch('name').split("");
+	async function submit() {
+		const nameFieldChars = watch('name').replaceAll(/\s/g, '').split("");
 		const allLetters = nameFieldChars.every(char => letterRegex.test(char));
-		if (allLetters) {
-			navigate(`/messages/${data.name.trim()}`);
+
+		if (allLetters && nameFieldChars.length > 1) {
+			navigate(`/messages/${nameFieldChars.join("")}`);
 		} else {
 			setError('name', { type: "custom", message: errorMessage });
 		}
@@ -24,28 +27,14 @@ function Home() {
 		mode: "onSubmit",
 	});
 
-	const inputs = [
-		{
-			name: 'name',
-			type: 'text',
-			placeholder: "Enter your name",
-			validation: {
-				required: "Name is required",
-				minLength: {
-					value: 2,
-					message: "You should include at least two chars",
-				},
 
-			}
-		},
-	];
 
 	return (
 		<form
 			onSubmit={handleSubmit(submit)}
 			className={styles.form}
 		>
-			{inputs.map(input =>
+			{login_inputs.map(input =>
 				<label key={input.name}>
 					<input
 						type={input.type}
