@@ -1,14 +1,15 @@
 .form{
-	width: 90%;
+	width: 95%;
 	max-width:800px;
 	background-color: #F6FBF9;
 	border-radius:20px;
-	padding:31px;
+	padding:16px;
 	display: flex;
 	flex-direction:column;
 	&__btns{
 		display: flex;
-		justify-content: space-between;
+		flex-direction:column;
+		gap:10px;
 	}
 	input, textarea {
 		width: 100%;
@@ -31,8 +32,13 @@
 		& > *:not(:last-child) {
 			margin-bottom:25px;
 		}
-		@media(min-width:991px) {
-				padding:62px;
+	
+		@media(min-width:467px) {
+			padding:31px;
+			&__btns{
+				flex-direction: row;
+				justify-content: space-between;
+			}
 		}
 		@media(min-width:767px) {
 			border-radius:40px;
@@ -42,5 +48,8 @@
 			.input,button{
 				font-size: 23px;
 			}
+		}
+		@media(min-width:991px) {
+			padding:62px;
 		}
 	}
