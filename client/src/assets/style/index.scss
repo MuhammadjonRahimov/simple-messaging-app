@@ -35,7 +35,6 @@ body{
 	font-weight: 400;
 }
 /* -------------------------------------------------- */
-
 #root{
 	height: 100%;
 	background: #84C7AE;
@@ -63,7 +62,6 @@ body{
 .wrapper{
 	display: flex;
 	flex-direction:column;
-	align-items: flex-start;
 	position: relative;
 	z-index: 2;
 	min-height: 100%;
