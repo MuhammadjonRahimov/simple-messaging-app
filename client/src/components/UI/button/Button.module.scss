@@ -2,15 +2,17 @@
 	color:#fff;
 	background-color: #84C7AE;
 	border-radius: 23.011px;
+	font-size: 18px;
 	padding:17px 44px;
-	font-size: 33px;
 	line-height: calc(44/33);
 	font-weight: bold;
 	transition:all 0.2s ease-in 0s;
 	position: relative;
 	z-index: 20;
-	@media(min-width:767.98px) {
-		font-size: 18px;
-		padding:23px 73px;
+	&.big{
+		@media(min-width:991px) {
+			font-size: 33px;
+			padding:23px 73px;
+		}
 	}
 }
