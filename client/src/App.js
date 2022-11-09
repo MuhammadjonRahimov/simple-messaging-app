@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { AuthContext } from './context';
 
-import Home from './pages/home/Home';
+import Home from './pages/Home';
 import Messages from './pages/messages/Messages';
 
 function App() {
