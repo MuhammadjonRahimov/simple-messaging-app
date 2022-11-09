@@ -2,7 +2,7 @@
 	color:#fff;
 	background-color: #84C7AE;
 	border-radius: 23.011px;
-	padding:23px 73px;
+	padding:17px 44px;
 	font-size: 33px;
 	line-height: calc(44/33);
 	font-weight: bold;
@@ -11,5 +11,6 @@
 	z-index: 20;
 	@media(min-width:767.98px) {
 		font-size: 18px;
+		padding:23px 73px;
 	}
 }
