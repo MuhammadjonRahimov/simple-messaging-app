@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { login_inputs } from '../utils/inputs';
 
 import Button from '../components/UI/button/Button';
+import Layout from '../components/UI/layout/Layout';
 
 const letterRegex = /[a-z]/;
 const errorMessage = "Name should include only letters.";
@@ -30,25 +31,27 @@ function Home() {
 
 
 	return (
-		<form
-			onSubmit={handleSubmit(submit)}
-			className={styles.form}
-		>
-			{login_inputs.map(input =>
-				<label key={input.name}>
-					<input
-						type={input.type}
-						placeholder={input.placeholder}
-						{...register(
-							input.name,
-							input.validation
-						)}
-					/>
-					{errors[input.name] && <p className="error-text">{errors[input.name].message}</p>}
-				</label>
-			)}
-			<Button type="submit" size="big">Enter</Button>
-		</form>
+		<Layout>
+			<form
+				onSubmit={handleSubmit(submit)}
+				className={styles.form}
+			>
+				{login_inputs.map(input =>
+					<label key={input.name}>
+						<input
+							type={input.type}
+							placeholder={input.placeholder}
+							{...register(
+								input.name,
+								input.validation
+							)}
+						/>
+						{errors[input.name] && <p className="error-text">{errors[input.name].message}</p>}
+					</label>
+				)}
+				<Button type="submit" size="big">Enter</Button>
+			</form>
+		</Layout>
 	)
 }
 
