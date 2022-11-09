@@ -1,34 +1,36 @@
-.window{
+.form{
 	position:absolute;
 	top: 50%;
 	left:50%;
 	transform:translate(-50%, -50%);
-	width: 95%;
 
-	&__row{
-		background-color: #F6FBF9;
-		border-radius:8px;
-		max-width:580px;
-		text-align: center;
-		padding:16px;
-		@media(min-width:767px) {
-			padding:31px;
-		}
+	width: 90%;
+	max-width:800px;
+	
+	background-color: #F6FBF9;
+	border-radius:29px;
+	@media(min-width:767px) {
+		border-radius:49px;
+	}
+	display: flex;
+	flex-direction:column;
+	
+	padding:31px;
 		@media(min-width:991px) {
 			padding:62px;
 		}
-	}
-	&__form{
-		display: flex;
-		flex-direction:column;
 		input {
 			width: 100%;
-			border: 1px solid rgba(0, 0, 0, 0.1);
+			border: 1.5px solid rgba(0, 0, 0, 0.1);
+			padding:16px;
+
+			@media(min-width:767px) {
+				padding:32px;
+			}
 		}
 		input,button{
 			line-height: calc(20/23);
 			border-radius:8px;
-			padding:11px 16px;
 			font-size: 17px;
 			@media(min-width:767px) {
 				font-size: 23px;
@@ -40,7 +42,6 @@
 		}
 		
 		& > *:not(:last-child) {
-			margin-bottom: 26px;
+			margin-bottom:25px;
 		}
 	}
-}

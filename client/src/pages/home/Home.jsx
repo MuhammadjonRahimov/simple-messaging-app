@@ -41,29 +41,25 @@ function Home() {
 	];
 
 	return (
-		<div className={styles.window}>
-			<div className={`container ${styles['window__row']}`}>
-				<form
-					onSubmit={handleSubmit(submit)}
-					className={styles['window__form']}
-				>
-					{inputs.map(input =>
-						<label key={input.name}>
-							<input
-								type={input.type}
-								placeholder={input.placeholder}
-								{...register(
-									input.name,
-									input.validation
-								)}
-							/>
-							{errors[input.name] && <p className="error-text">{errors[input.name].message}</p>}
-						</label>
-					)}
-					<Button type="submit">Enter</Button>
-				</form>
-			</div>
-		</div>
+		<form
+			onSubmit={handleSubmit(submit)}
+			className={styles.form}
+		>
+			{inputs.map(input =>
+				<label key={input.name}>
+					<input
+						type={input.type}
+						placeholder={input.placeholder}
+						{...register(
+							input.name,
+							input.validation
+						)}
+					/>
+					{errors[input.name] && <p className="error-text">{errors[input.name].message}</p>}
+				</label>
+			)}
+			<Button type="submit">Enter</Button>
+		</form>
 	)
 }
 
