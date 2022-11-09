@@ -1,4 +1,4 @@
-import styles from './Home.module.scss';
+import styles from '../Form.module.scss';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
