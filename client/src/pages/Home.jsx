@@ -28,8 +28,6 @@ function Home() {
 		mode: "onSubmit",
 	});
 
-
-
 	return (
 		<Layout>
 			<form
