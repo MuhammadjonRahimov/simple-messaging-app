@@ -10,7 +10,7 @@ input,button,select,textarea{
 	border:none;
 	font-family: inherit;
 }
-input::placeholder{
+*::placeholder{
 	font-family: inherit;
 }
 button{
