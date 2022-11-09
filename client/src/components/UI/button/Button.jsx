@@ -1,12 +1,12 @@
 import styles from './Button.module.scss';
 
 
-function Button({ children, type, ...props }) {
+function Button({ children, type, size, ...props }) {
 	return (
 		<>
 			<button
 				type={type || 'button'}
-				className={props.btntype === 'white' ? `${styles.btn} ${styles.white}` : styles.btn}
+				className={`${styles.btn} ${styles[size]}`}
 				{...props}
 			>
 				{children}
