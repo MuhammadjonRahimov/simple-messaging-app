@@ -7,7 +7,7 @@ import { AuthContext } from './context';
 
 import Home from './pages/Home';
 import Messages from './pages/messages/Messages';
-
+import NotFound from './pages/NotFound';
 function App() {
 	const { jwt, user, isAuth } = useContext(AuthContext);
 	return (
@@ -16,6 +16,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/messages/:username" element={<Messages />} />
+				<Route path="*" element={<NotFound />} />
 				{/* <Route path="*" element={<Navigate replace to={isAuth ? '/users' : '/login'} />} /> */}
 			</Routes>
 		</div>
