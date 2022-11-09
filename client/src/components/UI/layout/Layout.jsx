@@ -2,7 +2,9 @@ import styles from './Layout.module.scss';
 
 const Layout = params => {
 	return <div className={styles.wrapper}>
-		{params.children}
+		<div className={styles['inner-wrapper']}>
+			{params.children}
+		</div>
 	</div>
 }
 export default Layout
