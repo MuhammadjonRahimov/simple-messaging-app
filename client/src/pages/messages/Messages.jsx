@@ -1,13 +1,17 @@
-import Button from '../../components/UI/button/Button';
-import { useForm } from 'react-hook-form';
-import { Link, useParams } from 'react-router-dom';
-import styles from './Messages.module.scss';
-import Table from '../../components/UI/table/Table';
-import AsyncSelect from 'react-select/async';
-import useHttp from '../../hooks/use-http';
-import { sendMessage, getMessages } from '../../api/message-api';
+import message_styles from './Messages.module.scss';
+import form_styles from '../Form.module.scss'
+
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom';
+import AsyncSelect from 'react-select/async';
+import { sendMessage, getMessages } from '../../api/message-api';
+import useHttp from '../../hooks/use-http';
 import http from '../../utils/axios-instance';
+
+import Button from '../../components/UI/button/Button';
+import Layout from '../../components/UI/layout/Layout';
+import Table from '../../components/UI/table/Table';
 
 const cols = [
 	{ header: 'Sender', accessor: 'sender' },
@@ -23,7 +27,7 @@ const options = [
 
 
 function Messages() {
-
+	const navigate = useNavigate();
 	const [recipients, setRecipients] = useState([]);
 	const params = useParams();
 	const { send } = useHttp(sendMessage);
@@ -34,19 +38,19 @@ function Messages() {
 	});
 	const recipient = watch('recipient');
 
-	useEffect(() => {
-		if (recipient && recipient.length > 0) {
-			getRecipients();
-		}
-	}, [recipient]);
+	// useEffect(() => {
+	// 	if (recipient && recipient.length > 0) {
+	// 		getRecipients();
+	// 	}
+	// }, [recipient]);
 
-	useEffect(() => {
-		getMessage(params.username);
-		const getMessagesInterval = setInterval(() => {
-			getMessage(params.username);
-		}, 5000);
-		return () => clearInterval(getMessagesInterval);
-	}, [])
+	// useEffect(() => {
+	// 	getMessage(params.username);
+	// 	const getMessagesInterval = setInterval(() => {
+	// 		getMessage(params.username);
+	// 	}, 5000);
+	// 	return () => clearInterval(getMessagesInterval);
+	// }, []);
 
 	async function submit(data) {
 		const response = await send({ ...data, sender: params.username });
@@ -75,67 +79,68 @@ function Messages() {
 		setValue('recipient', r);
 		setRecipients([]);
 	}
+	function goHome() {
+		navigate('/');
+	}
 	return (
-		<div className={styles.window}>
-			<Link className={styles.link} to="/">Home</Link>
-			<div className={`container ${styles['window__row']}`}>
-				<form
-					onSubmit={handleSubmit(submit)}
-					className={styles['window__form']}
-				>
-					{/* <AsyncSelect
-						placeholder="Recipient"
-						// options={options}
-						loadOptions={loadOptionsHandler}
-						onInputChange={value => console.log(value)}
-					// onChange={(choice) => setValue('recipient', choice.value)}
-					/> */}
+		<Layout>
+			<form
+				onSubmit={handleSubmit(submit)}
+				className={form_styles.form}
+			>
+				{/* <AsyncSelect
+								placeholder="Recipient"
+								// options={options}
+								loadOptions={loadOptionsHandler}
+								onInputChange={value => console.log(value)}
+							// onChange={(choice) => setValue('recipient', choice.value)}
+							/> */}
 
-					<label htmlFor="" className={styles.label}>
-						<input type="text" {...register('recipient', {
-							required: 'The filed must be filled',
-							minLength: {
-								value: 1,
-							},
-						})}
-							placeholder="Enter recipient"
-						/>
-						{recipients.length > 0 && (recipients.length === 1 && recipients[0].value !== recipient) &&
-							<ul className={styles.list}>
-								{recipients.map(recipient =>
-									<li key={recipient.value} onClick={selectRecipient.bind(null, recipient.value)}>{recipient.value}</li>)}
-							</ul>}
-					</label>
-
-					{inputs.map(input =>
-						<label key={input.name}>
-							<input
-								{...register(input.name, input.validation)}
-								placeholder={input.placeholder}
-								type={input.type}
-							/>
-							{errors[input.name] && <p>{errors[input.name].message}</p>}
-						</label>
-					)}
-					<textarea placeholder="Your message" {...register('text', {
+				<label className={message_styles.label}>
+					<input type="text" {...register('recipient', {
 						required: 'The filed must be filled',
 						minLength: {
 							value: 1,
 						},
-					})}>
-					</textarea>
-					<div className={styles['window__btns']}>
-						<Button btntype='white' disabled={!isValid}>Send</Button>
-					</div >
-				</form>
-			</div>
-			<div className={styles.table}>
+					})}
+						placeholder="Enter recipient"
+					/>
+					{recipients.length > 0 && (recipients.length === 1 && recipients[0].value !== recipient) &&
+						<ul className={message_styles.list}>
+							{recipients.map(recipient =>
+								<li key={recipient.value} onClick={selectRecipient.bind(null, recipient.value)}>{recipient.value}</li>)}
+						</ul>}
+				</label>
+
+				{inputs.map(input =>
+					<label key={input.name}>
+						<input
+							{...register(input.name, input.validation)}
+							placeholder={input.placeholder}
+							type={input.type}
+						/>
+						{errors[input.name] && <p>{errors[input.name].message}</p>}
+					</label>
+				)}
+				<textarea placeholder="Your message" {...register('text', {
+					required: 'The filed must be filled',
+					minLength: {
+						value: 1,
+					},
+				})}>
+				</textarea>
+				<div className={form_styles['form__btns']}>
+					<Button>Send</Button>
+					<Button onClick={goHome}>Cancel</Button>
+				</div >
+			</form>
+			<div className={message_styles.table}>
 				{messages && <Table
 					cols={cols}
 					data={messages}
 				/>}
 			</div>
-		</div >
+		</Layout>
 	)
 }
 export default Messages;

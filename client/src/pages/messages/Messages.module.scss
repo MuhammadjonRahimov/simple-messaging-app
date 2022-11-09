@@ -1,21 +1,6 @@
-.window{
-	padding:2rem 0;
-	color:#fff;
-	margin-top: 0;
-	height: 100%;
-
-	.link {
-		margin:1rem;
-		color:red;
-		background-color: #162232;
-		color:#fff;
-		padding:1rem;
-		border-radius: 8px;
-	}
-
-	.label{
-		position: relative;
-	}
+.block{
+	position: relative;
+	min-height: 100vh;
 	.list{
 		position:absolute;
 		width: 100%;
