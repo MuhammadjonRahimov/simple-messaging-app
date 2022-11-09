@@ -1,10 +1,10 @@
-import styles from '../Form.module.scss';
+import styles from './Form.module.scss';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { login_inputs } from '../../utils/inputs';
+import { login_inputs } from '../utils/inputs';
 
-import Button from '../../components/UI/button/Button';
+import Button from '../components/UI/button/Button';
 
 const letterRegex = /[a-z]/;
 const errorMessage = "Name should include only letters.";
