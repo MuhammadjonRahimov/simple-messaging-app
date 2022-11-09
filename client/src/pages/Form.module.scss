@@ -1,8 +1,4 @@
 .form{
-	position:absolute;
-	top: 50%;
-	left:50%;
-	transform:translate(-50%, -50%);
 	width: 90%;
 	max-width:800px;
 	background-color: #F6FBF9;
@@ -21,8 +17,8 @@
 			font-size: 17px;
 		}
 		textarea{
-			resize:none;
-			height: 200px;
+			resize:vertical;
+			max-height: 350px;
 			min-width: 100%;
 		}
 		& > button {
