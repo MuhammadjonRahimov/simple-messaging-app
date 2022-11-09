@@ -11,7 +11,7 @@ import NotFound from './pages/NotFound';
 function App() {
 	const { jwt, user, isAuth } = useContext(AuthContext);
 	return (
-		<div className="wrapper">
+		<>
 			<ToastContainer />
 			<Routes>
 				<Route path="/" element={<Home />} />
@@ -19,7 +19,7 @@ function App() {
 				<Route path="*" element={<NotFound />} />
 				{/* <Route path="*" element={<Navigate replace to={isAuth ? '/users' : '/login'} />} /> */}
 			</Routes>
-		</div>
+		</>
 	);
 }
 export default App;
