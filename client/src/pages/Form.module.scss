@@ -6,6 +6,10 @@
 	padding:31px;
 	display: flex;
 	flex-direction:column;
+	&__btns{
+		display: flex;
+		justify-content: space-between;
+	}
 	input, textarea {
 		width: 100%;
 		border: 1.5px solid rgba(0, 0, 0, 0.1);
