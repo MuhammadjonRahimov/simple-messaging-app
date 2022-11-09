@@ -41,32 +41,6 @@ body{
 	position: relative;
 	overflow: hidden;
 }
-#root::before, #root::after{
-	content:'';
-	position: absolute;
-	width: 46%;
-	height: 46%;
-	background: #C1E3D6;
-	border-radius: 12%;
-	transform: rotate(-45deg);
-}
-
-#root::before{
-	left:-10.5%;
-	top:-10%;
-}
-#root::after{
-	right: -10.5%;
-	bottom:-10%;
-}
-.wrapper{
-	display: flex;
-	flex-direction:column;
-	position: relative;
-	z-index: 2;
-	min-height: 100%;
-}
-
 .error-text{
 	color:red;
 	padding-top: 10px;
