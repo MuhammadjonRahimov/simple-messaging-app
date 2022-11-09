@@ -10,15 +10,20 @@
 	padding:31px;
 	display: flex;
 	flex-direction:column;
-	input {
+	input, textarea {
 		width: 100%;
 		border: 1.5px solid rgba(0, 0, 0, 0.1);
 		padding:16px;
 		border-radius:15px;
 		}
-		input,button{
+		input,button,textarea{
 			line-height: calc(20/23);
 			font-size: 17px;
+		}
+		textarea{
+			resize:none;
+			height: 200px;
+			min-width: 100%;
 		}
 		& > button {
 			align-self: center;
