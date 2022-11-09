@@ -8,6 +8,7 @@ import AsyncSelect from 'react-select/async';
 import { sendMessage, getMessages } from '../../api/message-api';
 import useHttp from '../../hooks/use-http';
 import http from '../../utils/axios-instance';
+import { messages_inputs } from '../../utils/inputs';
 
 import Button from '../../components/UI/button/Button';
 import Layout from '../../components/UI/layout/Layout';
@@ -58,19 +59,7 @@ function Messages() {
 		reset();
 	}
 
-	const inputs = [
-		{
-			name: 'title',
-			type: 'text',
-			placeholder: "Title",
-			validation: {
-				required: 'The filed must be filled',
-				minLength: {
-					value: 1,
-				},
-			},
-		},
-	]
+
 	async function getRecipients() {
 		const res = await http.get(`/messages/recipients/${recipient}`);
 		setRecipients(res.data.data.recipients);
@@ -112,7 +101,7 @@ function Messages() {
 						</ul>}
 				</label>
 
-				{inputs.map(input =>
+				{messages_inputs.map(input =>
 					<label key={input.name}>
 						<input
 							{...register(input.name, input.validation)}

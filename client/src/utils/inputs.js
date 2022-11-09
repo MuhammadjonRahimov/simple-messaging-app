@@ -13,3 +13,17 @@ export const login_inputs = [
 		}
 	},
 ];
+
+export const messages_inputs = [
+	{
+		name: 'title',
+		type: 'text',
+		placeholder: "Title",
+		validation: {
+			required: 'The filed must be filled',
+			minLength: {
+				value: 1,
+			},
+		},
+	},
+]
