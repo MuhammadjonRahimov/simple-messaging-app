@@ -6,7 +6,7 @@ function Button({ children, type, ...props }) {
 		<>
 			<button
 				type={type || 'button'}
-				className={`${styles.btn} ${styles[size]}`}
+				className={styles.btn}
 				{...props}
 			>
 				{children}

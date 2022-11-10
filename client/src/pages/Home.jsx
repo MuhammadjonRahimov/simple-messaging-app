@@ -47,7 +47,7 @@ function Home() {
 						{errors[input.name] && <p className="error-text">{errors[input.name].message}</p>}
 					</label>
 				)}
-				<Button type="submit" size="big">Enter</Button>
+				<Button type="submit">Enter</Button>
 			</form>
 		</Layout>
 	)
