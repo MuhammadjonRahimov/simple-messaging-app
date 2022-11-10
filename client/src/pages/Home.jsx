@@ -7,7 +7,7 @@ import { login_inputs } from '../utils/inputs';
 import Button from '../components/UI/button/Button';
 import Layout from '../components/UI/layout/Layout';
 
-const letterRegex = /[a-z]/;
+const letterRegex = /[a-z]/i;
 const errorMessage = "Name should include only letters.";
 
 function Home() {
