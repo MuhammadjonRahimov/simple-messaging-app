@@ -9,6 +9,7 @@ const sequelize = new Sequelize({
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_DATABASE,
 	underscore: true,
+	logging: false,
 	//  dialectOptions: {
 	//      ssl: {
 	//          rejectUnauthorized: false

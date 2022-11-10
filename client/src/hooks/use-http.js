@@ -14,6 +14,7 @@ function useHttp(reqFunc) {
 		try {
 			setLoading(true);
 			const data = await reqFunc(reqData);
+			console.log(data);
 			setData(data);
 		} catch (error) {
 			console.log(error);

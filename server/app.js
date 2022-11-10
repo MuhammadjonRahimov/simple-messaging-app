@@ -1,11 +1,10 @@
 const express = require("express");
 const errorController = require("./controllers/errorControllers");
-const authMiddleware = require("./middlewares/authToken");
-const statusMiddleware = require("./middlewares/userStatus");
+
 
 // ROUTES
-const authRoutes = require("./routes/authRoutes");
-const userRoutes = require("./routes/userRoutes");
+
+const messageRoutes = require("./routes/messageRoutes");
 // ERROR CLASS
 const ErrorClass = require("./utilts/ErrorClass");
 // CREATE SERVER
@@ -17,9 +16,7 @@ app.use(require("cors")());
 
 
 
-// ROADS
-app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/users", authMiddleware, statusMiddleware, userRoutes);
+app.use("/api/v1/messages", messageRoutes);
 
 app.use(express.static(__dirname+"/build"));
 

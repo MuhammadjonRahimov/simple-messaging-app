@@ -35,30 +35,29 @@ function Messages() {
 	const { send: getMessage, error, loading, data: messages } = useHttp(getMessages);
 
 	const { register, handleSubmit, reset, formState: { errors, isValid }, setValue, watch } = useForm({
-		mode: "onChange",
+		mode: "onSubmit",
 	});
 	const recipient = watch('recipient');
 
 	useEffect(() => {
-		if (recipient && recipient.length > 0) {
+		if (recipients && recipients.length > 0) {
 			getRecipients();
 		}
-	}, [recipient]);
+	}, [recipients]);
 
-	useEffect(() => {
-		getMessage(params.username);
-		const getMessagesInterval = setInterval(() => {
-			getMessage(params.username);
-		}, 5000);
-		return () => clearInterval(getMessagesInterval);
-	}, []);
+	// useEffect(() => {
+	// 	getMessage(params.username);
+	// 	const getMessagesInterval = setInterval(() => {
+	// 		getMessage(params.username);
+	// 	}, 5000);
+	// 	return () => clearInterval(getMessagesInterval);
+	// }, []);
 
 	async function submit(data) {
 		const response = await send({ ...data, sender: params.username });
 		setValue('recipient', '');
 		reset();
 	}
-
 
 	async function getRecipients() {
 		const res = await http.get(`/messages/recipients/${recipient}`);
@@ -98,7 +97,8 @@ function Messages() {
 						<ul className={message_styles.list}>
 							{recipients.map(recipient =>
 								<li key={recipient.value} onClick={selectRecipient.bind(null, recipient.value)}>{recipient.value}</li>)}
-						</ul>}
+						</ul>
+					}
 				</label>
 
 				{messages_inputs.map(input =>
@@ -108,7 +108,7 @@ function Messages() {
 							placeholder={input.placeholder}
 							type={input.type}
 						/>
-						{errors[input.name] && <p>{errors[input.name].message}</p>}
+						{errors[input.name] && <p className="error-text">{errors[input.name].message}</p>}
 					</label>
 				)}
 				<textarea placeholder="Your message" {...register('text', {
@@ -119,7 +119,7 @@ function Messages() {
 				})}>
 				</textarea>
 				<div className={form_styles['form__btns']}>
-					<Button>Send</Button>
+					<Button type="submit">Send</Button>
 					<Button onClick={goHome}>Cancel</Button>
 				</div >
 			</form>
