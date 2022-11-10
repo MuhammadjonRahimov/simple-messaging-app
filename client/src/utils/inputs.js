@@ -7,7 +7,7 @@ export const login_inputs = [
 			required: "Name is required",
 			minLength: {
 				value: 2,
-				message: "You should include at least2 chars",
+				message: "You should include at least 2 chars",
 			},
 
 		}
