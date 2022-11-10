@@ -1,6 +1,5 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context';
 import toastHandler from '../utils/toastHandler';
 
 function useHttp(reqFunc) {
@@ -8,21 +7,17 @@ function useHttp(reqFunc) {
 	const [error, setError] = useState(null);
 	const [data, setData] = useState(null);
 
-	const { setIsAuth, setUser } = useContext(AuthContext);
 
 	const navigate = useNavigate();
 
 	const send = async (reqData) => {
-		setLoading(true);
-		setError(null);
 		try {
+			setLoading(true);
 			const data = await reqFunc(reqData);
 			setData(data);
 		} catch (error) {
+			console.log(error);
 			if (error.response.status === 401 || error.response.status === 403) {
-				setIsAuth(false);
-				setUser(null);
-				localStorage.removeItem('token');
 				toastHandler('error', error.response.data.message);
 				navigate('/login');
 			}
