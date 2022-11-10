@@ -18,7 +18,7 @@ function Home() {
 		const allLetters = nameFieldChars.every(char => letterRegex.test(char));
 
 		if (allLetters && nameFieldChars.length > 1) {
-			navigate(`/messages/${nameFieldChars.join("").toLowerCase()}`);
+			navigate(`/messages/${nameFieldChars.join("")}`);
 		} else {
 			setError('name', { type: "custom", message: errorMessage });
 		}
