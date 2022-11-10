@@ -26,11 +26,11 @@ const options = [
 	{ value: 'Sam', label: 'Sam' },
 ];
 
-
 function Messages() {
 	const navigate = useNavigate();
 	const [recipients, setRecipients] = useState([]);
 	const params = useParams();
+
 	const { send } = useHttp(sendMessage);
 	const { send: getMessage, error, loading, data: messages } = useHttp(getMessages);
 
@@ -39,19 +39,19 @@ function Messages() {
 	});
 	const recipient = watch('recipient');
 
-	// useEffect(() => {
-	// 	if (recipient && recipient.length > 0) {
-	// 		getRecipients();
-	// 	}
-	// }, [recipient]);
+	useEffect(() => {
+		if (recipient && recipient.length > 0) {
+			getRecipients();
+		}
+	}, [recipient]);
 
-	// useEffect(() => {
-	// 	getMessage(params.username);
-	// 	const getMessagesInterval = setInterval(() => {
-	// 		getMessage(params.username);
-	// 	}, 5000);
-	// 	return () => clearInterval(getMessagesInterval);
-	// }, []);
+	useEffect(() => {
+		getMessage(params.username);
+		const getMessagesInterval = setInterval(() => {
+			getMessage(params.username);
+		}, 5000);
+		return () => clearInterval(getMessagesInterval);
+	}, []);
 
 	async function submit(data) {
 		const response = await send({ ...data, sender: params.username });

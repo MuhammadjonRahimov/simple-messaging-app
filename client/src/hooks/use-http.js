@@ -1,18 +1,16 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { AuthContext } from '../context';
 import toastHandler from '../utils/toastHandler';
 
-function useHttp(reqFunc, startWithLoading = false) {
+function useHttp(reqFunc) {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	const [data, setData] = useState(null);
+
 	const { setIsAuth, setUser } = useContext(AuthContext);
+
 	const navigate = useNavigate();
-	useEffect(() => {
-		startWithLoading && send();
-	}, []);
 
 	const send = async (reqData) => {
 		setLoading(true);
