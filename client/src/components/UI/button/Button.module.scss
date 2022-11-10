@@ -9,10 +9,8 @@
 	transition:all 0.2s ease-in 0s;
 	position: relative;
 	z-index: 20;
-	&.big{
-		@media(min-width:991px) {
-			font-size: 33px;
-			padding:23px 73px;
-		}
+	@media(min-width:991px) {
+		font-size: 33px;
+		padding:23px 73px;
 	}
 }

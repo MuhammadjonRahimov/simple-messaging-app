@@ -1,7 +1,7 @@
 import styles from './Button.module.scss';
 
 
-function Button({ children, type, size, ...props }) {
+function Button({ children, type, ...props }) {
 	return (
 		<>
 			<button
