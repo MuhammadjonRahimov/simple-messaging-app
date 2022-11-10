@@ -1,12 +1,6 @@
 import styles from './Table.module.scss';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 
 function Table({ cols, data = [] }) {
-	const navigate = useNavigate();
-	useEffect(() => {
-	}, [])
-
 
 	const bodyContent = data.map((d, i) =>
 		<tr key={i}>

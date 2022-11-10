@@ -1,12 +1,16 @@
 .table{
 	width: 100%;
 	text-align: center;
+
 	tr{
 		height: 50px;
 	}
+	
 	thead{
-		background-color: #162232;
-		color:#fff;
+		background-color: white;
+		color:var(--primary);
+		tr{
+		}
 		th{
 			font-weight: bold;
 			font-size: 20px;
@@ -16,10 +20,10 @@
 		color:#333;
 		tr{
 			&:nth-child(odd) {
-				background-color: lightgray;
+				background-color: var(--secondary-secondary);
 			}
 			&:nth-child(even) {
-				background-color: #777;
+				background-color: var(--secondary);
 			}
 		}
 	}	
