@@ -1,7 +1,10 @@
 .table{
 	width: 100%;
 	text-align: center;
-
+	font-size: 12px;
+	@media(min-width:767px) {
+		font-size: 22px;
+	}
 	tr{
 		height: 50px;
 	}
@@ -13,22 +16,20 @@
 		}
 		th{
 			font-weight: bold;
-			font-size: 20px;
 		}
 	}
 	tbody{
-		color:#333;
 		tr{
 			&:nth-child(odd) {
 				background-color: var(--secondary-secondary);
 			}
 			&:nth-child(even) {
+				color:var(--primary);
 				background-color: var(--secondary);
 			}
 		}
 	}	
 	td{
-		font-size: 18px;
 		font-weight: 600;
 		padding:5px;
 	}
