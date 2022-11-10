@@ -3,7 +3,6 @@ import toastHandler from '../utils/toastHandler';
 
 export async function sendMessage(data) {
 	const response = await http({ url: `/messages`, method: 'POST', data });
-	console.log(response);
 	toastHandler(response.data.message, response.data.status);
 }
 

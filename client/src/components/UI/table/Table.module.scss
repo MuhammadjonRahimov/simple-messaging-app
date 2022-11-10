@@ -2,20 +2,29 @@
 	width: 100%;
 	text-align: center;
 	font-size: 12px;
+
 	@media(min-width:767px) {
 		font-size: 22px;
 	}
+
 	tr{
 		height: 50px;
 	}
 	
 	thead{
-		background-color: white;
 		color:var(--primary);
 		tr{
 		}
 		th{
+			background-color: white;
 			font-weight: bold;
+
+			&:first-child{
+				border-top-left-radius:15px;
+			}
+			&:last-child{
+				border-top-right-radius:15px;
+			}
 		}
 	}
 	tbody{
@@ -26,6 +35,14 @@
 			&:nth-child(even) {
 				color:var(--primary);
 				background-color: var(--secondary);
+			}
+			&:last-child{
+				& td:first-child{
+					border-bottom-left-radius:15px;
+				}
+				& td:last-child{
+					border-bottom-right-radius:15px;
+				}
 			}
 		}
 	}	
