@@ -4,7 +4,7 @@
 	min-height: 100%;
 	position: relative;
 	z-index: 1;
-	background: #84C7AE;
+	background: var(--primary);
 	overflow: hidden;
 
 	&::before,&::after{
@@ -13,7 +13,7 @@
 		z-index: -1;
 		width: 46%;
 		height: 46%;
-		background: #C1E3D6;
+		background: var(--secondary-secondary);
 		border-radius: 12%;
 		transform: rotate(-45deg);
 	}
