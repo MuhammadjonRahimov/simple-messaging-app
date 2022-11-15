@@ -18,7 +18,7 @@ import { useRef } from "react";
 
 function Messages() {
 	const { send } = useHttp(sendMessage);
-	const { send: fetchInitialMessages } = useHttp(getMessages);
+	const { send: fetchInitialMessages, loading } = useHttp(getMessages);
 
 	const navigate = useNavigate();
 	const [recipients, setRecipients] = useState([]);
@@ -89,67 +89,68 @@ function Messages() {
 	}
 	return (
 		<Layout>
-			{/* {loading ? <Spinner /> : */}
-			<>
-				<form onSubmit={handleSubmit(submit)} className={form_styles.form}>
-					<label className={message_styles.label}>
-						<input
-							type="text"
-							{...register("recipient", {
-								required: "The filed must be filled",
+			{loading ? <Spinner /> :
+				<>
+					<form onSubmit={handleSubmit(submit)} className={form_styles.form}>
+						<label className={message_styles.label}>
+							<input
+								type="text"
+								{...register("recipient", {
+									required: "The filed must be filled",
+									minLength: {
+										value: 1,
+									},
+								})}
+								placeholder="Enter a recipient"
+							/>
+							{errors.recipient && (
+								<p className="error-text">{errors.recipient.message}</p>
+							)}
+							{recipients?.length > 0 && recipients[0].value !== recipient && (
+								<ul className={message_styles.list}>
+									{recipients.map(recipient => (
+										<li
+											key={recipient.value}
+											onClick={selectRecipient.bind(null, recipient.value)}
+										>
+											{recipient.value}
+										</li>
+									))}
+								</ul>
+							)}
+						</label>
+						{messages_inputs.map(input => (
+							<label key={input.name}>
+								<input
+									{...register(input.name, input.validation)}
+									placeholder={input.placeholder}
+									type={input.type}
+								/>
+								{errors[input.name] && (
+									<p className="error-text">{errors[input.name].message}</p>
+								)}
+							</label>
+						))}
+						<textarea
+							placeholder="Your message"
+							{...register("text", {
+								required: "Message should not be empty!",
 								minLength: {
 									value: 1,
 								},
 							})}
-							placeholder="Enter a recipient"
-						/>
-						{errors.recipient && (
-							<p className="error-text">{errors.recipient.message}</p>
-						)}
-						{recipients?.length > 0 && recipients[0].value !== recipient && (
-							<ul className={message_styles.list}>
-								{recipients.map(recipient => (
-									<li
-										key={recipient.value}
-										onClick={selectRecipient.bind(null, recipient.value)}
-									>
-										{recipient.value}
-									</li>
-								))}
-							</ul>
-						)}
-					</label>
-					{messages_inputs.map(input => (
-						<label key={input.name}>
-							<input
-								{...register(input.name, input.validation)}
-								placeholder={input.placeholder}
-								type={input.type}
-							/>
-							{errors[input.name] && (
-								<p className="error-text">{errors[input.name].message}</p>
-							)}
-						</label>
-					))}
-					<textarea
-						placeholder="Your message"
-						{...register("text", {
-							required: "Message should not be empty!",
-							minLength: {
-								value: 1,
-							},
-						})}
-					></textarea>
-					{errors.text && <p className="error-text">{errors.text.message}</p>}
-					<div className={form_styles["form__btns"]}>
-						<Button type="submit">Send</Button>
-						<Button onClick={goHome}>Cancel</Button>
+						></textarea>
+						{errors.text && <p className="error-text">{errors.text.message}</p>}
+						<div className={form_styles["form__btns"]}>
+							<Button type="submit">Send</Button>
+							<Button onClick={goHome}>Cancel</Button>
+						</div>
+					</form>
+					<div className={message_styles["table-block"]}>
+						{messages?.length > 0 && <Table cols={cols} data={messages} />}
 					</div>
-				</form>
-				<div className={message_styles["table-block"]}>
-					{messages?.length > 0 && <Table cols={cols} data={messages} />}
-				</div>
-			</>
+				</>
+			}
 		</Layout>
 	);
 }
