@@ -4,9 +4,9 @@ import form_styles from '../Form.module.scss'
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
+import http from '../../utils/axios-instance';
 import { sendMessage, getMessages } from '../../api/message-api';
 import useHttp from '../../hooks/use-http';
-import http from '../../utils/axios-instance';
 import { messages_inputs } from '../../utils/inputs';
 import { cols } from '../../utils/columns';
 
@@ -14,35 +14,51 @@ import Button from '../../components/UI/button/Button';
 import Layout from '../../components/UI/layout/Layout';
 import Table from '../../components/UI/table/Table';
 import Spinner from '../../components/Spinner';
+import { useRef } from 'react';
 
 function Messages() {
+
+	const { send } = useHttp(sendMessage);
+	const { send: fetchInitialMessages } = useHttp(getMessages);
+
 	const navigate = useNavigate();
 	const [recipients, setRecipients] = useState([]);
 
 	const params = useParams();
-	const { send } = useHttp(sendMessage);
-	const { send: getMessage, loading, data: messages } = useHttp(getMessages);
+	const [messages, setMessages] = useState([]);
 
 	const { register, handleSubmit, reset, formState: { errors }, setValue, watch } = useForm({
 		mode: "onSubmit",
 	});
 
 	const recipient = watch('recipient');
+	const socket = useRef();
 
 	useEffect(() => {
 		getRecipients();
 	}, [recipient]);
 
 	useEffect(() => {
-		getMessage(params.username);
-		const getMessagesInterval = setInterval(() => {
-			getMessage(params.username);
-		}, 5000);
-		return () => clearInterval(getMessagesInterval);
+		getInitialMessages();
+		connectWs();
 	}, []);
 
+
+	async function getInitialMessages() {
+		const messages = await fetchInitialMessages(params.username);
+		setMessages(messages);
+	}
+
+	function connectWs() {
+		socket.current = new WebSocket(`ws://192.168.1.195:8080/ws?name=${params.username}`);
+		socket.current.onmessage = (event) => {
+			const message = JSON.parse(event.data);
+			setMessages(prev => [message, ...prev]);
+		}
+	}
+
 	async function submit(data) {
-		await send({ ...data, sender: params.username });
+		await send({ sender: params.username, ...data });
 		setValue('recipient', '');
 		reset();
 	}
@@ -51,11 +67,12 @@ function Messages() {
 		const res = await http({ url: `/messages/recipients/${recipient}`, method: "GET" });
 		setRecipients(res.data.data.recipients);
 	}
+
 	function selectRecipient(r) {
 		setValue('recipient', r);
-		// setValue('recipient', '');
 		setRecipients([]);
 	}
+
 	function goHome() {
 		navigate('/');
 		setValue('recipient', '');
@@ -120,7 +137,6 @@ function Messages() {
 					/>}
 				</div>
 			</>
-			{/* } */}
 		</Layout>
 	)
 }
