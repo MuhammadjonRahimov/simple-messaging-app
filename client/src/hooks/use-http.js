@@ -15,6 +15,7 @@ function useHttp(reqFunc) {
 			setLoading(true);
 			const data = await reqFunc(reqData);
 			setData(data);
+			return data;
 		} catch (error) {
 			console.log(error);
 			if (error.response.status === 401 || error.response.status === 403) {
