@@ -23,8 +23,9 @@ function useHttp(reqFunc) {
 				navigate('/login');
 			}
 			setError(error);
+		} finally {
+			setLoading(false);
 		}
-		setLoading(false);
 	}
 	return { send, loading, error, data }
 }
